@@ -161,23 +161,22 @@ minimap2 -a -x map-ont -t 4 /home/saidou/Documents/MUW_analysis/NGS-Results/Expe
 ## longshot for variant calling
 
 ## create new fille ~/Documents/MUW_analysis/analysis_Vienna/barcode02
-
-01. source activate artic-ncov2019
-02. artic guppyplex --min-length 400 --max-length 700 --directory /home/saidou/Documents/MUW_analysis/NGS-Results/Experiment1/barcode02 --prefix barcode02
-03. minimap2 -a -x map-ont -t 4 /home/saidou/Documents/MUW_analysis/NGS-Results/Experiment1/barcode02/analysis02/MN908947.3.fasta barcode02_barcode02.fastq > barcode02.sam # create sam files
-04. less barcode02.sam
-05. samtools view
-06. samtools view -b barcode02.sam > barcode02.bam # convert sam to bam files
-07. less barcode02.bam
-08. samtools sort barcode02.bam > barcode02_sorted.bam # sorted the bam files and name it barcode02_sorted
-09. samtools index barcode02_sorted.bam  # to index my barcode02_sorted.bam, qfter execution we optain barcode02_sorted.bam.bai
-10. I am going for longshot: https://github.com/pjedge/longshot
-11. longshot --bam barcode02_sorted.bam --ref /home/saidou/Documents/MUW_analysis/NGS-Results/Experiment1/barcode02/analysis02/MN908947.3.fasta --out longshot_barcode02.vcf
-12. cat longshot_barcode02.vcf # to view longshot_barcode02.vcf files
-13. cat longshot_barcode02.vcf | grep -v "^#"  # to view and exclude the line contain # sympol in  the ongshot_barcode02.vcf files
-14. cat longshot_barcode02.vcf | grep -v "^#" | wc -l # to view and exclude the line contain # sympol in  the ongshot_barcode02.vcf files and count
-15. 
-
+```
+source activate artic-ncov2019
+artic guppyplex --min-length 400 --max-length 700 --directory /home/saidou/Documents/MUW_analysis/NGS-Results/Experiment1/barcode02 --prefix barcode02
+minimap2 -a -x map-ont -t 4 /home/saidou/Documents/MUW_analysis/NGS-Results/Experiment1/barcode02/analysis02/MN908947.3.fasta barcode02_barcode02.fastq > barcode02.sam 	# create sam files
+less barcode02.sam
+samtools view
+samtools view -b barcode02.sam > barcode02.bam 																	# convert sam to bam files
+less barcode02.bam
+samtools sort barcode02.bam > barcode02_sorted.bam 																# sorted the bam files and name it barcode02_sorted
+samtools index barcode02_sorted.bam  																		# to index my barcode02_sorted.bam, qfter execution we optain barcode02_sorted.bam.bai
+																						# I am going for longshot: https://github.com/pjedge/longshot
+longshot --bam barcode02_sorted.bam --ref /home/saidou/Documents/MUW_analysis/NGS-Results/Experiment1/barcode02/analysis02/MN908947.3.fasta --out longshot_barcode02.vcf
+cat longshot_barcode02.vcf 																			# to view longshot_barcode02.vcf files
+cat longshot_barcode02.vcf | grep -v "^#"  																	# to view and exclude the line contain # sympol in  the ongshot_barcode02.vcf files
+cat longshot_barcode02.vcf | grep -v "^#" | wc -l 																# to view and exclude the line contain # sympol in  the ongshot_barcode02.vcf files and count
+```
 
 
 ## medaka for fasta consensus generation / sequence polishing:
